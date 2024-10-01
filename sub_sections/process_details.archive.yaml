@@ -69,7 +69,7 @@ definitions:
 
       sub_sections:
         solution:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
     Chemical_bath_deposition:
       m_annotations:
@@ -158,7 +158,7 @@ definitions:
 
       sub_sections:
         dipping_solution:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
     Doctorblading:
       base_sections:
@@ -218,7 +218,7 @@ definitions:
 
       sub_sections:
         ink:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
     Environmental_conditions:
       quantities:
@@ -425,7 +425,7 @@ definitions:
 
       sub_sections:
         chemicals:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Chemical'
           repeats: true
 
         evaporation_segment:
@@ -555,7 +555,7 @@ definitions:
 
       sub_sections:
         ink:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
     Ion_exchange_by_dipping:
       m_annotations:
@@ -622,7 +622,7 @@ definitions:
 
       sub_sections:
         chemicals:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Chemical'
           repeats: true   
 
     Slot_dye_coating:
@@ -673,7 +673,7 @@ definitions:
 
       sub_sections:
         ink:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
     Spin_coating:
       base_sections:
@@ -781,7 +781,7 @@ definitions:
 
       sub_sections:
         solution:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
         spin_coating_segments:
           section: '#/Spin-coating_segments'
@@ -939,7 +939,7 @@ definitions:
 
       sub_sections:
         ink:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
     Sputtering:
       base_sections:
@@ -981,7 +981,7 @@ definitions:
 
       sub_sections:
         target_material:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Chemical'
           repeats: true
 
         sputtering_segment:
@@ -1058,10 +1058,10 @@ definitions:
 
       sub_sections:
         Solutions:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Solution'
 
         Chemicals:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Chemical'
           repeats: true
 
     Temperature_segment: 

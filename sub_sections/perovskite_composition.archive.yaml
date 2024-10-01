@@ -68,15 +68,15 @@ definitions:
             eln:
               component: EnumEditQuantity
 
-        band_gap:
-          type: float
-          unit: eV
-          shape: []
-          description: Band gap of photoabsorber in eV. 
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-              defaultDisplayUnit: eV              
+        # band_gap:
+        #   type: float
+        #   unit: eV
+        #   shape: []
+        #   description: Band gap of photoabsorber in eV. 
+        #   m_annotations:
+        #     eln:
+        #       component: NumberEditQuantity 
+        #       defaultDisplayUnit: eV              
 
       # Sub sections
       sub_sections:
@@ -93,7 +93,7 @@ definitions:
           repeats: true                
 
         # secondary_phases_impurities_and_dopants:
-        #   section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+        #   section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Materials_in_layer'
         #   repeats: true
 
     Ions:

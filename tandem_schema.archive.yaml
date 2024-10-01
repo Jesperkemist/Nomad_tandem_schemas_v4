@@ -20,23 +20,23 @@ definitions:
       # Sub sections
       sub_sections:
         reference_data:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/reference_data.archive.yaml#/Reference_data'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/reference_data.archive.yaml#/Reference_data'
 
         key_performance_metrics:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/measurements.archive.yaml#/Key_performance_metrics'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/measurements.archive.yaml#/Key_performance_metrics'
 
         certified_performance:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/measurements.archive.yaml#/Certified_performance'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/measurements.archive.yaml#/Certified_performance'
           repeats: true
 
         device_classification:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/device_classification.archive.yaml#/Device_classification'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/device_classification.archive.yaml#/Device_classification'
       
         device_stack:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/device_stack.archive.yaml#/Device_stack'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/device_stack.archive.yaml#/Device_stack'
 
         measurements:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/measurements.archive.yaml#/Measurements'
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/measurements.archive.yaml#/Measurements'
 
         module_data:
-          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/module_data.archive.yaml#/Module_data'          
+          section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/module_data.archive.yaml#/Module_data'          
