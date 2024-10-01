@@ -1,0 +1,1108 @@
+definitions:
+  name: Process_step
+  sections:
+    Process_step:
+      quantities:
+        date:
+          type: Datetime
+          description: The datestamp of the procedure
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
+
+        duration_of_procedure:
+          type: float
+          unit: minute
+          shape: []
+          description: The length in time of the procedure [min]
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute
+
+      sub_sections:
+        environmental_conditions:
+          section: '#/Environmental_conditions'
+
+    Antisolvent_details:
+      quantities:
+        volume:
+          type: float
+          shape: []
+          unit: ml
+          description: volume of the antisolvent 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        time_at_dispense_start:
+          type: float
+          shape: []
+          unit: s
+          description: Time of the start of the dispensing in seconds after the start of the spin-coating program
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s
+
+        dispense_speed:
+          type: float
+          shape: []
+          unit: ml/s
+          description: The dispense speed
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml/s
+
+        distance_between_tip_and_substrate:
+          type: float
+          shape: []
+          unit: mm
+          description: Distance between the pipet tip and the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+              defaultDisplayUnit: mm
+
+      sub_sections:
+        solution:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Chemical_bath_deposition:
+      m_annotations:
+        eln:
+          properties:
+            order:
+              - "date"
+              - "duration_of_procedure"
+      base_sections:
+        - '#/Process_step'
+        - '#/Dipping'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str 
+
+    Dip_coating:
+      m_annotations:
+        eln:
+          properties:
+            order:
+              - "date"
+              - "duration_of_procedure"
+      base_sections:
+        - '#/Process_step'
+        - '#/Dipping'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+    Dipping:
+      quantities:
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        dipping_time:
+          type: float
+          unit: minute
+          shape: []
+          description: The length the sample is dipped in hte solution [min]
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute 
+
+        drying_procedure:
+          type: 
+            type_kind: Enum
+            type_data:
+              -  'Gas_blowing'
+              -  'Self_drying'
+              -  'Heating'
+              -  'Tissue_paper'
+              -  'Other'
+          shape: []
+          description: The drying procedure
+          m_annotations:
+            eln:
+              component: EnumEditQuantity        
+
+        number_of_repetitions:
+          type: int
+          shape: []
+          description: The number of times the sample is dipped into the solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        time_between_repetitions:
+          type: float
+          unit: minute
+          shape: []
+          description: The time between the sample is dipped in the solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute         
+
+      sub_sections:
+        dipping_solution:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Doctorblading:
+      base_sections:
+        - '#/Process_step'      
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C   
+
+        time_of_program:
+          type: float
+          shape: []
+          unit: s
+          description: Length of the spinning program
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: s
+
+        coating_speed:
+          type: float
+          shape: []
+          unit: mm/s
+          description: Coating speed
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: mm/s
+
+        ink_volume:
+          type: float
+          shape: []
+          unit: ml
+          description: volume of the precursor solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        coater_model:
+          type: str
+          shape: []
+          description: The Slot-die-coater model
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+      sub_sections:
+        ink:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Environmental_conditions:
+      quantities:
+        in_glove_box:
+          type: boolean
+          shape: []
+          description: True if the step is conducted in a glove box
+          m_annotations:
+              eln:
+                component: BoolEditQuantity
+
+        atmosphere:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Air'
+              - 'Dry_air'
+              - 'N2'
+              - 'Ar'
+              - 'Vacuum'
+              - 'O2'
+              - 'He'
+              - 'Other'
+          description:
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        pressure:
+          type: float
+          shape: []
+          unit: Pa
+          description: Total pressure
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: Pa
+
+        ambient_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Ambient temperature
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        relative_humidity:
+          type: float
+          shape: []
+          description: The average relative humidity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity           
+
+        oxygen_concentration:
+          type: float
+          shape: []
+          description: Oxygen concentration
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+    Evaporation_multi_source:
+      base_sections:
+        - '#/Process_step'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        substrate_rotation_rate:
+          type: float
+          shape: []
+          unit: rpm/s
+          description: The rotation rate of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: rpm/s 
+
+        chamber_pressure:
+          type: float
+          shape: []
+          unit: Pa
+          description: The pressure in the reaction chamber
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: Pa 
+
+      sub_sections:
+        evaporation_sources:
+          section: '#/Evaporation_source'
+          repeats: true
+
+    Evaporation_segment:
+      quantities:
+        time_of_segment:
+          type: float
+          unit: s
+          shape: []
+          description: Time of the segment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s
+
+        evaporation_rate:
+          type: float
+          unit: g/s
+          shape: []
+          description: Rate of evaporation from the source
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: g/s
+
+        deposition_rate:
+          type: float
+          unit: nm/s
+          shape: []
+          description: rate of film deposition from on the film
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm/s
+
+    Evaporation_single_source:
+      m_annotations:
+        eln:
+          properties:
+            order:
+              - "date"
+              - "duration_of_procedure"
+      base_sections:
+        - '#/Process_step'
+        - '#/Evaporation_source'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        substrate_rotation_rate:
+          type: float
+          shape: []
+          unit: rpm/s
+          description: The rotation rate of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: rpm/s 
+
+        chamber_pressure:
+          type: float
+          shape: []
+          unit: Pa
+          description: The pressure in the reaction chamber
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: Pa 
+
+    Evaporation_source:
+      quantities:
+        crucible_material:
+          type: str
+          shape: []
+          description: The material the crucible is made of
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        mass_in_crucible:
+          type: float
+          unit: g
+          shape: []
+          description: The mass of material in the crucible at the star of the process
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: g
+
+      sub_sections:
+        chemicals:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          repeats: true
+
+        evaporation_segment:
+          section: '#/Evaporation_segment'
+          repeats: true
+
+    Gas_quenching_details:
+      quantities:
+        starting time:
+          type: float
+          shape: []
+          unit: s
+          description: Time of the start of the gas quenching in seconds after the start of the spin-coating program
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s
+
+        duration:
+          type: float
+          shape: []
+          unit: s
+          description: Length of the procedure
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: s
+
+        pressure:
+          type: float
+          shape: []
+          unit: Pa
+          description: Gas pressure
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: Pa
+
+        gas:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Air'
+              - 'Dry_air'
+              - 'N2'
+              - 'Ar'
+              - 'O2'
+              - 'He'
+              - 'Other'
+          description:
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+    Heating:  
+      base_sections:
+        - '#/Process_step'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        heating_medium:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Hotplate'
+              - 'Furnace'
+              - 'Liquid_bath'
+              - 'Gas'
+              - 'Other'
+          description: The way by which the temperature is controlled
+          m_annotations:
+            eln:
+              component: EnumEditQuantity         
+
+      sub_sections:
+        temperature_segments:
+          section: '#/Temperature_segment'
+          repeats: true
+
+    Inkjet_printing:
+      base_sections:
+        - '#/Process_step'      
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        drop_size:
+          type: float
+          shape: []
+          unit: nm
+          description: Diameter of the ink drops
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm
+
+        ink_volume:
+          type: float
+          shape: []
+          unit: ml
+          description: volume of the precursor solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        printer_model:
+          type: str
+          shape: []
+          description: The Inkjet-printer model
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+      sub_sections:
+        ink:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Ion_exchange_by_dipping:
+      m_annotations:
+        eln:
+          properties:
+            order:
+              - "date"
+              - "duration_of_procedure"
+      base_sections:
+        - '#/Process_step'
+        - '#/Dipping'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+    Ion_exchange_by_gas_diffusion:
+      base_sections:
+        - '#/Process_step'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        exposure_time:
+          type: float
+          unit: minute
+          shape: []
+          description: The length the sample is exposed to the reaction gas [min]
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute 
+
+        temperature_of_reaction_mixture:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the mixture releasing the reaction gas
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        pressure_of_reaction_mixture:
+          type: float
+          shape: []
+          unit: Pa
+          description: Pressure of the mixture releasing the reaction gas
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: Pa
+
+      sub_sections:
+        chemicals:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          repeats: true   
+
+    Slot_dye_coating:
+      base_sections:
+        - '#/Process_step'      
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        coating_speed:
+          type: float
+          shape: []
+          unit: mm/s
+          description: Coating speed
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: mm/s
+
+        ink_volume:
+          type: float
+          shape: []
+          unit: ml
+          description: volume of the precursor solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        coater_model:
+          type: str
+          shape: []
+          description: The Slot-die-coater model
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+      sub_sections:
+        ink:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Spin_coating:
+      base_sections:
+        - '#/Process_step'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        time_of_program:
+          type: float
+          shape: []
+          unit: s
+          description: Length of the spinning program
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: s
+
+        solvent_volume:
+          type: float
+          shape: []
+          unit: ml
+          description: volume of the precursor solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        static_or_dynamic_spin-coating:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'Static'
+              - 'Dynamic'
+          description: Static spin-coating refers to when the liquid is dispensed on the substrate before substrate starts to rotate 
+          m_annotations:
+            eln:  
+              component: EnumEditQuantity
+
+        time_at_dispense_start:
+          type: float
+          shape: []
+          unit: s
+          description: Time of the start of the dispensing in seconds after the start of the spin-coating program
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s
+
+        dispense_speed:
+          type: float
+          shape: []
+          unit: ml/s
+          description: The dispense speed
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml/s
+
+        distance_between_tip_and_substrate:
+          type: float
+          shape: []
+          unit: mm
+          description: Distance between the pipet tip and the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+              defaultDisplayUnit: mm
+
+        spin-coater_model:
+          type: str
+          shape: []
+          description: The spin-coater model
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        is_antisolvent_quenching_used:
+          type: boolean
+          shape: []
+          description: True if an antisolvent is used during spin-coating
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        is_gas_quenching_used:
+          type: boolean
+          shape: []
+          description: True if a gas quenching is used during spin-coating
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+      sub_sections:
+        solution:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+        spin_coating_segments:
+          section: '#/Spin-coating_segments'
+          repeats: true
+
+        antisolvent_details:
+          section: '#/Antisolvent_details'
+
+        gas_quenching_details:
+          section: '#/Gas_quenching_details'
+
+    Spin-coating_segments:
+      quantities:
+        time_of_segment:
+          type: float
+          unit: s
+          shape: []
+          description: Time of the segment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s
+
+        rpm_at_start:
+          type: float
+          unit: rpm
+          shape: []
+          description: Rotational speed at start of segment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: rpm
+
+        rpm_at_end:
+          type: float
+          unit: rpm
+          shape: []
+          description: Rotational speed at end of segment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: rpm
+
+        acceleration:
+          type: float
+          unit: rpm/s
+          shape: []
+          description: Acceleration of the rotation
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: rpm/s
+
+    Spray-coating:
+      base_sections:
+        - '#/Process_step'      
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C    
+
+        ink_volume:
+          type: float
+          shape: []
+          unit: ml
+          description: volume of the precursor solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        deposition_area:
+          type: float
+          shape: []
+          unit: cm**2
+          description: Area being deposited
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: cm**2 
+
+        time_of_program:
+          type: float
+          shape: []
+          unit: s
+          description: Length of the spinning program
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: s    
+
+        nozzle_sample_distance:
+          type: float
+          shape: []
+          unit: cm
+          description: Distance between the nozzle and the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: cm 
+
+        nozzle_diameter:
+          type: float
+          shape: []
+          unit: mm
+          description: The diameter of the nozzle
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: mm 
+
+        gas_pressure:
+          type: float
+          shape: []
+          unit: Pa
+          description: The gas pressure
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: Pa    
+
+        carrier_gas:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Air'
+              - 'Dry_air'
+              - 'N2'
+              - 'Ar'
+              - 'O2'
+              - 'He'
+              - 'Other'
+          description: The carrier gas
+          m_annotations:
+            eln:
+              component: EnumEditQuantity               
+
+        coater_model:
+          type: str
+          shape: []
+          description: The Spray-coater model
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+      sub_sections:
+        ink:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Sputtering:
+      base_sections:
+        - '#/Process_step'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        deposition_procedure:
+          type: str
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        substrate_rotation_rate:
+          type: float
+          shape: []
+          unit: rpm/s
+          description: The rotation rate of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: rpm/s 
+
+        chamber_pressure:
+          type: float
+          shape: []
+          unit: Pa
+          description: The pressure in the reaction chamber
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: Pa 
+
+      sub_sections:
+        target_material:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          repeats: true
+
+        sputtering_segment:
+          section: '#/Sputtering_segment'
+          repeats: true
+
+    Sputtering_segment:
+      quantities:
+        time_of_segment:
+          type: float
+          unit: s
+          shape: []
+          description: Time of the segment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s
+
+        target_power:
+          type: float
+          unit: J/s
+          shape: []
+          description: Rate of evaporation from the source
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: J/s
+
+        deposition_rate:
+          type: float
+          unit: nm/s
+          shape: []
+          description: rate of film deposition from on the film
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm/s
+
+    Storage:
+      base_sections:
+        - '#/Process_step'
+
+    Other:
+      base_sections:
+        - '#/Process_step'
+      quantities:
+        method:
+          type: str
+          shape: []
+          description: The type of method used
+          m_annotations:
+            eln:
+              component: StringEditQuantity        
+
+        substrate_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        deposition_area:
+          type: float
+          shape: []
+          unit: cm**2
+          description: Area being deposited
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: cm**2 
+
+      sub_sections:
+        Solutions:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+        Chemicals:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+          repeats: true
+
+    Temperature_segment: 
+      quantities:
+          time_of_segment:
+            type: float
+            unit: minute
+            shape: []
+            description: Time of the segment
+            m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: minute
+
+          temperature_at_start:
+            type: float
+            unit: °C
+            shape: []
+            description: Temperature at the start of the segment
+            m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: °C
+
+          temperature_at_end:
+            type: float
+            unit: °C
+            shape: []
+            description: Temperature at the end of the segment
+            m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: °C
+
+          temperature_acceleration:
+            type: float
+            unit: °C/minute
+            shape: []
+            description: Temperature acceleration
+            m_annotations:
+              eln:
+                component: NumberEditQuantity 
+                defaultDisplayUnit: °C/minute 
+

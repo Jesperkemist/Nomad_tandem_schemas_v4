@@ -1,0 +1,79 @@
+definitions:
+  name: Module_data
+  sections:
+    Module_data:
+      quantities:
+        is_a_monolithic_module:
+          type: boolean
+          shape: []
+          description: True if the compleat device is a monolith module (which would imply a 2-terminal device)
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        contains_subcell_that_is_a_module:
+          type: boolean
+          shape: []
+          description: True if one or more of the subcells are a module (which would imply a 4-terminal device)
+          m_annotations:
+            eln:
+              component: BoolEditQuantity   
+
+      sub_sections:
+        module_description:
+          section: '#/Module'
+          repeats: true                     
+
+    Module:
+      quantities:
+        subcell_association:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Monolithic_device'
+              - 'Bottom_cell'
+              - 'Middle_cell'
+              - 'Top_cell'
+              - 'Other'
+          description: For a 2 terminal cell, all layers are bart of a monolithic configuration. For a 4 terminal cell, there will be one bottom cell, one top cell, and a space between them. For a 6 terminal cell, there will also be a middle cell 
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        number_of_cells:
+          type: int
+          shape: []
+          description: The number of individual cells in the module
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+
+        individual_cell_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The area of each individual cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+              defaultDisplayUnit: cm**2
+
+        active_module_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The total active area of the module
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2
+
+        total_module_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The total area of the module
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2

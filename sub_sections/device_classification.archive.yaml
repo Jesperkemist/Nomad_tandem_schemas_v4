@@ -1,0 +1,107 @@
+definitions:
+  name: Device classification
+  sections:
+    Device_classification:
+      quantities:
+        tandem_architecture:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'Monolithic'
+              - 'Stacked'
+              - 'Spectral_splitter'
+              - 'Wide_bandgap_cell_used_as_reflector'
+              - '...'
+          shape: []
+          description: The type of tandem cell architecture
+          m_annotations:
+            eln:
+              component: EnumEditQuantity        
+
+        tandem_technology:
+          type: 
+            type_kind: Enum
+            type_data:
+              -  'CIGS-Perovskite'
+              -  'CIGS-Perovskite-Perovskite'
+              -  'CIS-Perovskite'
+              -  'CZTS-Perovskite'
+              -  'GaAs-Perovskite'
+              -  'OPV-OPV-Perovskite'
+              -  'OPV-Perovskite'
+              -  'PbS-QD-Perovskite'
+              -  'Perovskite-DSSC'
+              -  'Perovskite-OPV'
+              -  'Perovskite-PbS-QD'
+              -  'Perovskite-Perovskite'
+              -  'Perovskite-Perovskite-Perovskite'
+              -  'Silicon-Perovskite'
+              -  'Silicon-Perovskite-Perovskite'
+              - '...'
+          shape: []
+          description: The tandem cells photoabsorbers, listed from the bottom cell and up  
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        number_of_junctions:
+          type: int
+          shape: []
+          description: Number of photo absorbers
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        number_of_terminals:
+          type: int
+          shape: []
+          description: Number of terminals
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        is_flexible:
+          type: bool
+          shape: []
+          description: True if the compleat tandem cell is flexible
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        is_semitransparent:
+          type: boolean
+          shape: []
+          description: True if the compleat tandem cell is semitransparent
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        is_bifacial:
+          type: boolean
+          shape: []
+          description: True if the cell is bifacial
+          m_annotations:
+            eln:
+              component: BoolEditQuantity              
+
+        is_encapsulated:
+          type: boolean
+          shape: []
+          description: True if the cell is encapsulated
+          m_annotations:
+            eln:
+              component: BoolEditQuantity 
+
+        band_gaps:
+          type: float
+          unit: eV
+          shape: ['*']
+          description: Band gap of photoabsorber in eV. The first cell is the one that is furthest from the sun (lowest band gap)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+      # Sub sections
+      sub_sections:
+        device_area:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Device_area'

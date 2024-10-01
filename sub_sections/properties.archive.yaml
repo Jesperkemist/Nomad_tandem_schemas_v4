@@ -1,0 +1,79 @@
+definitions:
+  name: Properties
+  sections:
+    Band_gap:
+      quantities:
+        value:
+          type: float
+          unit: eV
+          shape: []
+          description: Band gap of photoabsorber in eV. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+              defaultDisplayUnit: eV
+
+        estimated_from:
+          type: 
+            type_kind: Enum
+            type_data:
+              -  'Absorption_onset'
+              -  'Tauc_analysis'
+              -  'Absorption_inflection_point'
+              -  'EQE_onset'
+              -  'EQE_inflection_point'
+              -  'Literature_value'
+              -  'Other'
+          shape: []
+          description: The method by which the band gap was estimated 
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        is_graded:
+          type: boolean
+          shape: []
+          description: True if the band gap is graded
+          m_annotations:
+            eln:
+              component: BoolEditQuantity   
+
+    Device_area:
+      quantities:
+        substrate_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: Area of the substrate
+          m_annotations:
+            eln:
+              defaultDisplayUnit: cm**2
+              component: NumberEditQuantity          
+
+        cell_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: Area of an individual cell (i.e. dark area)
+          m_annotations:
+            eln:
+              defaultDisplayUnit: cm**2
+              component: NumberEditQuantity  
+
+        illuminated_cell_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The illuminated cell area 
+          m_annotations:
+            eln:
+              defaultDisplayUnit: cm**2
+              component: NumberEditQuantity 
+
+        number_of_cells_per_substrate:
+          type: int
+          shape: []
+          description: Number of individual cells per substrate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity       

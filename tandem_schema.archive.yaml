@@ -1,0 +1,42 @@
+definitions:
+  name: Perovskite Tandem
+  sections:
+    TandemSolarCell:
+      base_sections: 
+        - nomad.datamodel.data.EntryData
+
+      # Top section data
+      quantities:
+        # To be filled in automatically
+        # ----------------------------
+        database_id:
+          type: np.int64
+          description: Database ID (Filled in automatically)
+          shape: []
+          m_annotations:
+            eln:
+              component: NumberEditQuantity           
+
+      # Sub sections
+      sub_sections:
+        reference_data:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/reference_data.archive.yaml#/Reference_data'
+
+        key_performance_metrics:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/measurements.archive.yaml#/Key_performance_metrics'
+
+        certified_performance:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/measurements.archive.yaml#/Certified_performance'
+          repeats: true
+
+        device_classification:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/device_classification.archive.yaml#/Device_classification'
+      
+        device_stack:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/device_stack.archive.yaml#/Device_stack'
+
+        measurements:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/measurements.archive.yaml#/Measurements'
+
+        module_data:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/module_data.archive.yaml#/Module_data'          

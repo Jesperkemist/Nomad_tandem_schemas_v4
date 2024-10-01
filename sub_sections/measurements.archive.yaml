@@ -1,0 +1,1853 @@
+definitions:
+  name: Measurements
+  sections:
+    Measurements:
+      sub_sections:
+        EQE:
+          section: '#/EQE'
+          repeats: true
+
+        Flexibility:
+          section: '#/Flexibility'
+          repeats: true
+          
+        JV-measurements:
+          section: '#/JV_measurement'
+          repeats: true
+
+        Outdoor_performance:
+          section: '#/Outdoor_performance'
+          repeats: true
+          
+        Stability:
+          section: '#/Stability'
+          repeats: true
+
+        Stabilised_performance:
+          section: '#/Stabilised_performance'
+          repeats: true
+
+        Transmission:
+          section: '#/Transmission'
+          repeats: true
+
+    Base_measurement:
+      quantities:
+        date:
+          type: Datetime
+          description: The datestamp of the procedure
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity        
+
+        measurement_done_on:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'Compleat_device'
+              - 'Bottom_cell'
+              - 'Middle_cell'
+              - 'Top_cell'
+              - 'shaded_top_cell'
+              - 'shaded_middle_cell'              
+              - 'Other'
+          description: The type of device on which the measurement is done              
+          m_annotations:
+            eln:
+              component: EnumEditQuantity          
+
+        age_of_cell:
+            type: float
+            unit: hr
+            shape: []
+            description: The time between cell completion and measurement
+            m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: hr
+
+      sub_sections:
+        environmental_conditions:
+          section: '../uploads/3PqJJxRIQkqQsyEYkrWDGg/raw/process_details.archive.yaml#/Environmental_conditions'
+
+    Certification_details:
+      quantities:
+        is_certified:
+          type: boolean
+          shape: []
+          description:
+          m_annotations:
+              eln:
+                component: BoolEditQuantity
+
+        certification_institute:
+          type: str
+          shape: []
+          description: Name of the certification institute
+          m_annotations:
+              eln:
+                component: StringEditQuantity
+
+        certification_protocol:
+          type: str
+          shape: []
+          description: Name of the certification institute
+          m_annotations:
+              eln:
+                component: StringEditQuantity
+
+        certification_date:
+          type: Datetime
+          description: Date for certification
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
+
+    Certified_performance:
+      m_annotations:
+        eln:
+          properties:
+            order:
+              - "is_certified"
+              - "certification_institute"
+              - "certification_protocol"
+              - "certification_date"
+      base_sections:
+        - '#/Certification_details'
+        # - '#/Key_performance_metrics'  
+      quantities:
+        pce_stabilized: 
+          type: float
+          shape: []
+          description: Stabilized solar cell efficiency under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        pce_from_iv_data: 
+          type: float
+          shape: []
+          description: The solar cell efficiency under standard conditions extracted from JV data
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        voc:      
+          type: float
+          unit: V
+          shape: []          
+          description: The open circuit voltage under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        j_sc:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The short circuit current
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2
+
+        ff:      
+          type: float
+          shape: []
+          description: The fill factor (given as a number between zero and 1)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        v_mp:      
+          type: float
+          unit: V
+          shape: []
+          description: The maximum power point potential under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        j_mp:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The maximum power point current under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2       
+
+        T80_ISOS_L_1:      
+          type: float
+          unit: hr
+          shape: []
+          description: The time it takes for the device performance to decrease to 80% of the initial value under maximum power point tracking (or held at constant potential close to the Vmp) under standard AM 1.5. illumination in room temperature 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr
+
+        T80_ISOS_L_3:      
+          type: float
+          unit: hr
+          shape: []
+          description: The time it takes for the device performance to decrease to 80% of the initial value under maximum power point tracking under standard AM 1.5. illumination at 85°C and 50% RH 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr
+
+        pce_1000h_ISOS_L_1: 
+          type: float
+          shape: []
+          description: PCE after 1000 hr under ISOS-L-1 conditions (AM 1.5, Maximum powerpoint, room temperature, inert atmosphere)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        pce_1000h_ISOS_L_3: 
+          type: float
+          shape: []
+          description: PCE after 1000 hr under ISOS-L-3 conditions (AM 1.5, Maximum powerpoint, 85°C and 50 % RH  )
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+    EQE:
+      base_sections:
+        - '#/Base_measurement'     
+      quantities:      
+        wavelength_at_start:
+          type: float
+          unit: nm
+          shape: []
+          description: wavelength at start of measurement
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        wavelength_at_end:
+          type: float
+          unit: nm
+          shape: []
+          description: wavelength at end of measurement
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        step_size:
+          type: float
+          unit: nm
+          shape: []
+          description: The size of the steps in the scanning
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        integration_time:
+          type: float
+          unit: s
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s     
+
+        scan_speed:
+          type: float
+          unit: nm/s
+          shape: []
+          description: scan_speed
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm/s     
+
+        measurement_time:
+          type: float
+          shape: []
+          unit: s
+          description: Total measurement time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity          
+              defaultDisplayUnit: s
+
+        cell_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        illuminated_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The illuminated cell area (by the primary excitation source)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2
+
+        is_under_bias_light:
+          type: boolean
+          shape: []
+          description: True if a bias light is used
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        equipment_brand_name:
+          type: str
+          shape: []
+          description: The brand name of the equipment
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+      sub_sections:
+        EQE_metrics:
+          section: '#/EQE_metrics'
+
+        bias_light:
+          section: '#/Light_conditions'
+
+        raw_data:
+          # section: '#/Raw_data_eqe'
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/get_raw_data.archive.yaml#/Raw_data_eqe'
+
+    EQE_metrics:
+      quantities:
+        integrated_current: 
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The integrated short circuit current under AM 1.5
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2 
+
+        EQE_onset:
+          type: float      
+          unit: nm
+          shape: []
+          description: The onset where the EQE starts to increase (as a proxy for the band gap)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        EQE_inflection_point:
+          type: float      
+          unit: nm
+          shape: []
+          description: The inflection point after which the EQE starts to increase (as a proxy for the band gap)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        EQE_max:
+          type: float      
+          shape: []
+          description: The maximum EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+    Flexibility:
+      base_sections:
+        - '#/Base_measurement'
+      quantities:
+        PCE_before_bending:
+          type: float
+          shape: []
+          description: The PCE at the start of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        PCE_after_bending:
+          type: float
+          shape: []
+          description: The PCE at the end of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity        
+
+        bending_radius:
+          type: float
+          shape: []
+          unit: °
+          description: The bending radius in degrees
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °
+
+        number_of_bending_cycles:
+          type: int
+          shape: []
+          description: The number of bending cycles
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+    JV_scan_parameters:
+      quantities:
+        scan_speed:
+          type: float
+          unit: V/s
+          shape: []
+          description: scan_speed
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V/s
+
+        delay_time:
+          type: float
+          unit: s
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s              
+
+        integration_time:
+          type: float
+          unit: s
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s     
+
+        voltage_step:
+          type: float
+          unit: mV
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mV 
+
+        source_meter_brand_name:
+          type: str
+          shape: []
+          description: The brand name of the source meter/potentiostat
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+    JV_measurement:
+      base_sections:
+        - '#/Base_measurement'
+        - '#/JV_scan_parameters'        
+      quantities:  
+        cell_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        is_certified:
+          type: boolean
+          shape: []
+          description: True if the measurement is done by a certification institute
+          m_annotations:
+              eln:
+                component: BoolEditQuantity
+
+        is_preconditioned_before_measurement:
+          type: boolean
+          shape: []
+          description: True if the cell is preconditioned before the measurement 
+          m_annotations:
+              eln:
+                component: BoolEditQuantity 
+
+      sub_sections:
+        light_conditions:
+          section: '#/Light_conditions'
+
+        preconditioning:
+          section: '#/Preconditioning'
+          repeats: true
+
+        certification_details:
+          section: '#/Certification_details'
+
+        jv_metrics:
+          section: '#/JV_metrics'
+
+        raw_data:
+          # section: '#/Raw_data_jv'
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/get_raw_data.archive.yaml#/Raw_data_jv'
+
+    JV_metrics:
+      quantities:
+        pce: 
+          type: float
+          shape: []
+          description: The solar cell efficiency in percent
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        voc:      
+          type: float
+          unit: V
+          shape: []          
+          description: The open circuit voltage under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        j_sc:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The short circuit current
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2
+
+        FF:      
+          type: float
+          shape: []
+          description: The fill factor (given as a number between zero and 1)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        v_mp:      
+          type: float
+          unit: V
+          shape: []
+          description: The maximum power point potential under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        j_mp:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The maximum power point current under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2
+
+        rs:      
+          type: float
+          unit: ohm
+          shape: []
+          description: Series resistance
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        rsh:      
+          type: float
+          unit: ohm
+          shape: []
+          description: Shunt resistance
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+    Key_performance_metrics:
+      quantities:
+        pce_stabilized: 
+          type: float
+          shape: []
+          description: Stabilized solar cell efficiency under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        pce_from_iv_data: 
+          type: float
+          shape: []
+          description: The solar cell efficiency under standard conditions extracted from JV data
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        voc:      
+          type: float
+          unit: V
+          shape: []          
+          description: The open circuit voltage under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        j_sc:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The short circuit current
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2
+
+        ff:      
+          type: float
+          shape: []
+          description: The fill factor (given as a number between zero and 1)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        v_mp:      
+          type: float
+          unit: V
+          shape: []
+          description: The maximum power point potential under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        j_mp:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The maximum power point current under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2 
+
+        T80_ISOS_L_1:      
+          type: float
+          unit: hr
+          shape: []
+          description: The time it takes for the device performance to decrease to 80% of the initial value under maximum power point tracking (or held at constant potential close to the Vmp) under standard AM 1.5. illumination in room temperature 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr
+
+        T80_ISOS_L_3:      
+          type: float
+          unit: hr
+          shape: []
+          description: The time it takes for the device performance to decrease to 80% of the initial value under maximum power point tracking under standard AM 1.5. illumination at 85°C and 50% RH 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr
+
+        pce_1000h_ISOS_L_1: 
+          type: float
+          shape: []
+          description: PCE after 1000 hr under ISOS-L-1 conditions (AM 1.5, Maximum powerpoint, room temperature, inert atmosphere)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        pce_1000h_ISOS_L_3: 
+          type: float
+          shape: []
+          description: PCE after 1000 hr under ISOS-L-3 conditions (AM 1.5, Maximum powerpoint, 85°C and 50 % RH  )
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+    Light_conditions:
+      quantities:
+        light_source:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'Metal halide'
+              - 'Sulfur plasma'
+              - 'LED'
+              - 'White LED'
+              - 'Laser'
+              - 'Xenon-plasma'
+              - 'Generic solar simulator'              
+              - 'UV-lamp'
+              - 'Ambient outdoor'
+              - 'Ambient indoor'
+              - 'Dark_conditions'
+              - 'Other'
+          description: The type of light source used during the measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity  
+
+        light_spectra:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'AM 1.5'
+              - 'AM 1.0'
+              - 'AM 0'
+              - 'UVA'
+              - 'UVB'
+              - 'Monochromatic'
+              - 'Ambient outdoor'
+              - 'Ambient indoor'
+              - 'Dark'
+              - 'Other'
+          description: The type of light source used during the measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        light_intensity:
+          type: float
+          unit: mW/cm**2
+          shape: []
+          description: The light intensity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mW/cm**2
+
+        peak_wavelength:
+          type: float
+          unit: nm
+          shape: []
+          description: The dominant wavelength. Most relevant for monochromatic and indoor lightning
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        illumination:
+          type: float
+          unit: lux
+          shape: []
+          description: The illumination. Primarily for low light applications
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        illuminated_area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The illuminated cell area
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2
+
+        shadow_mask_is_used:
+          type: boolean
+          shape: []
+          description: True of a mask is used to ensure that only a part of the device is illuminated
+          m_annotations:
+              eln:
+                component: BoolEditQuantity 
+
+        light_source_brand_name:
+          type: str
+          shape: []
+          description: The brand name of the solar simulator
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        solar_simulator_class:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'AAA'
+              - 'AAB'
+              - 'AAC'
+              - 'ABA'
+              - 'ABB'
+              - 'ABC'
+              - 'ACA'
+              - 'ACB'
+              - 'ACC'
+              - 'BAA'
+              - 'BAB'
+              - 'BAC'
+              - 'BBA'
+              - 'BBB'
+              - 'BBC'
+              - 'BCA'
+              - 'BCB'
+              - 'BCC'
+              - 'CAA'
+              - 'CAB'
+              - 'CAC'
+              - 'CBA'
+              - 'CBB'
+              - 'CBC'
+              - 'CCA'
+              - 'CCB'
+              - 'CCC'
+              - 'Unknown'
+          description: A three-letter code of As, Bs, and Cs. The order of the letters represents the quality of; spectral match, spatial non-uniformity, and temporal instability 
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+    Load_cycling:
+      quantities:
+        time_on:
+          type: float
+          unit: minute
+          shape: []
+          description: The duration of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute          
+
+        time_off:
+          type: float
+          unit: minute
+          shape: []
+          description: The duration of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute    
+
+        number_of_cycles:
+          type: int
+          shape: []
+          description: The duration of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        light_intensity_on:
+          type: float
+          unit: mW/cm**2
+          shape: []
+          description: The light intensity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mW/cm**2
+
+        light_intensity_off:
+          type: float
+          unit: mW/cm**2
+          shape: []
+          description: The light intensity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mW/cm**2
+
+        potential_bias_type_on:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'MPPT'
+              - 'Open_circuit'
+              - 'Constant_potential'
+              - 'Constant_current'
+              - 'Passive_resistance'
+              - 'Other'
+          description: The type of potential bias used during the measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        potential_bias_type_off:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'MPPT'
+              - 'Open_circuit'
+              - 'Constant_potential'
+              - 'Constant_current'
+              - 'Passive_resistance'
+              - 'Other'
+          description: The type of potential bias used during the measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        potential_bias_on:
+          type: float
+          unit: V
+          shape: []
+          description: The potential the cell is held at (if held at constant potential)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: V   
+
+        potential_bias_off:
+          type: float
+          unit: V
+          shape: []
+          description: The potential the cell is held at (if held at constant potential)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: V   
+
+        bias_current_on:
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The current density the cell is held at (if held at constant current density)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: mA/cm**2  
+
+        bias_current_off:
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The current density the cell is held at (if held at constant current density)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: mA/cm**2  
+
+        bias_resistance_on:
+          type: float
+          unit: ohm
+          shape: []
+          description: The resistance density the cell is held at (if held at constant bias resistance)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity 
+                defaultDisplayUnit: ohm 
+
+        bias_resistance_off:
+          type: float
+          unit: ohm
+          shape: []
+          description: The resistance density the cell is held at (if held at constant bias resistance)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity 
+                defaultDisplayUnit: ohm 
+
+        cell_temperature_on:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        cell_temperature_off:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        ambient_temperature_on:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        ambient_temperature_off:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        relative_humidity_on:
+          type: float
+          shape: []
+          description: The relative humidity
+          m_annotations:
+              eln:
+                component: NumberEditQuantity  
+
+        relative_humidity_off:
+          type: float
+          shape: []
+          description: The relative humidity
+          m_annotations:
+              eln:
+                component: NumberEditQuantity  
+
+    Outdoor_performance:
+      quantities:
+        time_start:
+          type: Datetime
+          description: When the measurement started
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity      
+
+        time_end:
+          type: Datetime
+          description: When the measurement ended
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity  
+
+        location_city:
+          type: str
+          shape: []
+          description: City
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        location_latitude:
+          type: float
+          shape: []
+          description: Latitude
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity              
+
+        location_longitude:
+          type: float
+          shape: []
+          description: Longitude
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity
+
+        tilt:
+          type: float
+          shape: []
+          description: Latitude
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity              
+
+        cardinal_direction:
+          type: float
+          shape: []
+          description: tilt
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity  
+
+        number_of_solar_tracking_axes:
+          type: int
+          shape: []
+          description: Latitude
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity  
+
+        max_humidity:
+          type: float
+          shape: []
+          description: maximum ambient humidity during the measurement
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity 
+
+        max_ambient_temperature:
+          type: float
+          unit: °C
+          shape: []
+          description: maximum temperature during the measurement
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        min_ambient_temperature:
+          type: float
+          unit: °C
+          shape: []
+          description: minimum temperature during the measurement
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        max_cell_temperature:
+          type: float
+          unit: °C
+          shape: []
+          description: maximum temperature during the measurement
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        min_cell_temperature:
+          type: float
+          unit: °C
+          shape: []
+          description: minimum temperature during the measurement
+          m_annotations:
+            eln:  
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        measurement_protocol:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'ISOS-O-1'
+              - 'ISOS-O-2'
+              - 'ISOS-O-3'
+              - 'Other'
+          description: The measurement protocol  
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+        
+        bias_potential_type:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'MPPT'
+              - 'Open_circuit'
+              - 'Constant_potential'
+              - 'Constant_current'
+              - 'Passive_resistance'
+              - 'Other'
+          description: The type of potential bias used during the measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        bias_potential:
+          type: float
+          unit: V
+          shape: []
+          description: The potential the cell is held at (if held at constant potential)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: V   
+
+        bias_current:
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The current density the cell is held at (if held at constant current density)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: mA/cm**2  
+
+        bias_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: The resistance density the cell is held at (if held at constant bias resistance)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+              defaultDisplayUnit: ohm 
+        
+        is_JV_curves_measured_periodically:
+          type: boolean
+          shape: []
+          description: True of JV scans are done periodically
+          m_annotations:
+            eln:
+              component: BoolEditQuantity 
+
+      sub_sections:
+        certification_details:
+          section: '#/Certification_details'
+
+        stability_metrics:
+          section: '#/Outdoor_metrics'
+
+        raw_data:
+          # section: '#/Raw_data_outdoor_performance'
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/get_raw_data.archive.yaml#/Raw_data_outdoor_performance'          
+
+        JV-measurements:
+          section: '#/JV_measurement'
+          repeats: true 
+
+    Outdoor_metrics:
+      base_sections:
+        - '#/Stability_metrics'     
+      quantities:      
+        total_power_generated:
+          type: float
+          shape: []
+          unit: kWh/m**2
+          description: Total power generated in kWh/m**2
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: kWh/m**2
+
+        average_power_generated:
+          type: float
+          shape: []
+          description: Average power generated in kWh/year/m**2
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+    Preconditioning:
+      quantities:
+        time:
+          type: float
+          unit: minute
+          shape: []
+          description: The duration of the preconditioning
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute        
+
+        potential:
+          type: float
+          unit: V
+          shape: []
+          description: The potential the cell is held at during the preconditioning
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V
+
+        light_intensity:
+          type: float
+          unit: mW/cm**2
+          shape: []
+          description: The light intensity the cell is held at during the preconditioning
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mW/cm**2
+
+    Raw_data_eqe:
+      quantities:
+        wavelength:      
+          type: float
+          unit: nm
+          shape: ['*']          
+          description: The wavelength
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        EQE:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+    Raw_data_jv:
+      quantities:
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+    Raw_data_outdoor_performance:
+      quantities:
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+        pce:      
+          type: float
+          shape: ['*']          
+          description: Efficiency
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Current density at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+        light_intensity:
+          type: float
+          unit: mW/cm**2
+          shape: []
+          description: The light intensity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mW/cm**2
+
+    Raw_data_stabilised_performance:
+      quantities:
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+        pce:      
+          type: float
+          shape: ['*']          
+          description: Efficiency
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+    Raw_data_stability:
+      quantities:
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+        pce:      
+          type: float
+          shape: ['*']          
+          description: Efficiency
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Current density at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+    Raw_data_transmission:
+      quantities:
+        wavelength:      
+          type: float
+          unit: nm
+          shape: ['*']          
+          description: The wavelength
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        transmittance:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        reflectance:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        absorbance:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+    Stabilised_performance:
+      base_sections:
+        - '#/Base_measurement'   
+      quantities:      
+        cell_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        type_of_measurement:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'Constant_potential'
+              - 'Constant_current'
+              - 'Maximum_powerpoint_tracking'
+          description: Type of stabilisation measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity            
+
+        potential:
+          type: float
+          unit: V
+          shape: []
+          description: The potential (if measured at constant potential)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The current density (if measured at constant current)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2               
+
+        stabilisation_time:
+            type: float
+            unit: s
+            shape: []
+            description: The time until the cell was stabilised
+            m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: s        
+
+      sub_sections:
+        light_conditions:
+          section: '#/Light_conditions'
+
+        stabilised_performance_metrics:
+          section: '#/Stabilised_performance_metrics'
+
+        certification_details:
+          section: '#/Certification_details'
+
+        raw_data:
+          # section: '#/Raw_data_stabilised_performance'
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/get_raw_data.archive.yaml#/Raw_data_stabilised_performance'          
+
+    Stabilised_performance_metrics:
+      quantities:
+        pce: 
+          type: float
+          shape: []
+          description: The solar cell efficiency in percent
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        v_mp:      
+          type: float
+          unit: V
+          shape: []
+          description: The maximum power point potential under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        j_mp:      
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The maximum power point current under standard conditions
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA/cm**2
+
+    Stability:
+      base_sections:
+        - '#/Base_measurement'      
+      quantities:  
+        cell_temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the cell
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        length_of_measurement:
+          type: float
+          unit: hr
+          shape: []
+          description: The duration of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr
+
+        bias_potential_type:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'MPPT'
+              - 'Open_circuit'
+              - 'Constant_potential'
+              - 'Constant_current'
+              - 'Passive_resistance'
+              - 'Other'
+          description: The type of potential bias used during the measurement
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        bias_potential:
+          type: float
+          unit: V
+          shape: []
+          description: The potential the cell is held at (if held at constant potential)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: V   
+
+        bias_current:
+          type: float
+          unit: mA/cm**2
+          shape: []
+          description: The current density the cell is held at (if held at constant current density)
+          m_annotations:
+              eln:
+                component: NumberEditQuantity
+                defaultDisplayUnit: mA/cm**2  
+
+        bias_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: The resistance density the cell is held at (if held at constant bias resistance)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+              defaultDisplayUnit: ohm 
+
+        is_measured_with_load_cycling:
+          type: boolean
+          shape: []
+          description: True if there is a periodicity to the load of the cell (potential, current, resistance, or temperature)
+          m_annotations:
+            eln:
+              component: BoolEditQuantity 
+
+        is_illuminated:
+          type: boolean
+          shape: []
+          description: True if if the cell is illuminated 
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        is_certified:
+          type: boolean
+          shape: []
+          description: True if the measurement is done by a certification institute
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        is_JV_curves_measured_periodically:
+          type: boolean
+          shape: []
+          description: True of JV scans are done periodically
+          m_annotations:
+            eln:
+              component: BoolEditQuantity 
+
+        measurement_protocol:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'ISOS-D-1'
+              - 'ISOS-D-1l'
+              - 'ISOS-D-2'
+              - 'ISOS-D-2l'
+              - 'ISOS-D-3'
+              - 'ISOS-V-1'
+              - 'ISOS-V-1l'
+              - 'ISOS-V-2'
+              - 'ISOS-V-2l'
+              - 'ISOS-V-3'
+              - 'ISOS-L-1'
+              - 'ISOS-L-1l'
+              - 'ISOS-L-2'
+              - 'ISOS-L-2l'
+              - 'ISOS-L-3'
+              - 'ISOS-O-1'
+              - 'ISOS-O-2'
+              - 'ISOS-O-3'
+              - 'ISOS-T-1'
+              - 'ISOS-T-1l'
+              - 'ISOS-T-2'
+              - 'ISOS-T-2l'
+              - 'ISOS-T-3'
+              - 'ISOS-T-3l'
+              - 'ISOS-LC-1'
+              - 'ISOS-LC-1l'
+              - 'ISOS-LC-2'
+              - 'ISOS-LC-2l'
+              - 'ISOS-LC-3'
+              - 'ISOS-LC-3l'
+              - 'ISOS-LT-1'
+              - 'ISOS-LT-2'
+              - 'ISOS-LT-3'
+              - 'IEC 61215'
+              - 'Other'
+          description: The measurement protocol  
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+      sub_sections:
+        certification_details:
+          section: '#/Certification_details'
+
+        light_conditions:
+          section: '#/Light_conditions'
+
+        load_cycling_conditions:
+          section: '#/Load_cycling'
+          repeats: true
+
+        stability_metrics:
+          section: '#/Stability_metrics'
+
+        raw_data:
+          # section: '#/Raw_data_stability'
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/get_raw_data.archive.yaml#/Raw_data_stability'          
+
+        JV-measurements:
+          section: '#/JV_measurement'
+          repeats: true
+
+    Stability_metrics:
+      quantities:
+        PCE_at_start:
+          type: float
+          shape: []
+          description: The PCE at the start of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        PCE_at_end:
+          type: float
+          shape: []
+          description: The PCE at the end of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        burn_in_period_observed:
+          type: boolean
+          shape: []
+          description: True if if an initial burn in period is observed
+          m_annotations:
+            eln:
+              component: BoolEditQuantity 
+
+        burn_in_period_length:
+          type: float
+          unit: hr
+          shape: []
+          description: Length of the burn in period 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr 
+
+        PCE_1000h:
+          type: float
+          shape: []
+          description: The PCE after 1000 hours of measurement 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity           
+
+        T80:
+          type: float
+          unit: hr
+          shape: []
+          description: The time after which the cell have degraded to 80 % of the initial efficiency 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr        
+
+        T80s:
+          type: float
+          unit: hr
+          shape: []
+          description: The time after which the cell have degraded to 80 % of the efficiency reached after the initial burn in period 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr      
+
+        T95:
+          type: float
+          unit: hr
+          shape: []
+          description: The time after which the cell have degraded to 95 % of the initial efficiency 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr          
+
+        T95s:
+          type: float
+          unit: hr
+          shape: []
+          description: The time after which the cell have degraded to 95 % of the efficiency reached after the initial burn in period 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr    
+
+    Transmission:
+      base_sections:
+        - '#/Base_measurement'      
+      quantities:
+        average_transmission_in_the_visible_range:
+          type: float
+          shape: []
+          description: The average transmission in the visible range (400-700 nm)
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        spectrometer_model:
+          type: str
+          shape: []
+          description: The brand name of the spectrometer
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+      sub_sections:
+        raw_data:
+          # section: '#/Raw_data_transmission'
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/get_raw_data.archive.yaml#/Raw_data_transmission'          
+

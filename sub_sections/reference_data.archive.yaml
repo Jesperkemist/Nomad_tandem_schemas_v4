@@ -1,0 +1,77 @@
+definitions:
+  name: Reference data
+  sections:
+    Reference_data:
+      quantities:
+        doi:
+          type: str
+          shape: []
+          description:  The DOI number of the source of the data (if available) 
+                        Examples
+                        10.1021/jp5126624
+                        10.1016/j.electacta.2017.06.032
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        data_entered_by_author:
+          type: boolean
+          shape: []
+          description:
+          m_annotations:
+              eln:
+                component: BoolEditQuantity
+
+        sample_id:
+          type: str
+          shape: []
+          description: ID in the original data source (for traceability)
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        free_text_comment:
+          type: str
+          shape: []
+          m_annotations:
+              eln:
+                component: StringEditQuantity
+
+        # To be complemented automatically based on DOI number if given  
+        # ----------------------------
+        publication_date:
+          type: Datetime
+          description: Publication date
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
+
+        lead_author:
+          type: str
+          shape: []
+          description: Name of lead author. Will be extracted automatically from www.crossref.org if a DOI number is given
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        journal:
+          type: str
+          shape: []
+          description: Name of Journal. Will be extracted automatically from www.crossref.org if a DOI number is given
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        # To be filled in automatically
+        # ----------------------------
+        # database_id:
+        #   type: np.int64
+        #   description: Database ID (Filled in automatically)
+
+        name_of_person_entering_the_data:
+          type: str
+          shape: []
+          description: Name of person entering the data (Filled in automatically) 
+          m_annotations:
+            eln:
+              component: StringEditQuantity 

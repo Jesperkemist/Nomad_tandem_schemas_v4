@@ -1,0 +1,220 @@
+definitions:
+  name: Raw data
+  sections:
+    Raw_data_eqe:
+      quantities:
+        wavelength:      
+          type: float
+          unit: nm
+          shape: ['*']          
+          description: The wavelength
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        EQE:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+    Raw_data_jv:
+      quantities:
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+    Raw_data_outdoor_performance:
+      quantities:
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+        pce:      
+          type: float
+          shape: ['*']          
+          description: Efficiency
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Current density at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+        light_intensity:
+          type: float
+          unit: mW/cm**2
+          shape: []
+          description: The light intensity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mW/cm**2
+
+    Raw_data_stabilised_performance:
+      quantities:
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+        pce:      
+          type: float
+          shape: ['*']          
+          description: Efficiency
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Potential
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+    Raw_data_stability:
+      quantities:
+        time:      
+          type: float
+          unit: s
+          shape: ['*']          
+          description: Time
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: s 
+
+        pce:      
+          type: float
+          shape: ['*']          
+          description: Efficiency
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        potential:      
+          type: float
+          unit: V
+          shape: ['*']          
+          description: Potential at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: V 
+
+        current:      
+          type: float
+          unit: mA
+          shape: ['*']          
+          description: Current density at the maximum powerpoint
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mA 
+
+    Raw_data_transmission:
+      quantities:
+        wavelength:      
+          type: float
+          unit: nm
+          shape: ['*']          
+          description: The wavelength
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+        transmittance:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        reflectance:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        absorbance:      
+          type: float
+          shape: ['*']          
+          description: The EQE
+          m_annotations:
+            eln:
+              component: NumberEditQuantity

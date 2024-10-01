@@ -1,0 +1,1437 @@
+definitions:
+  name: Device stack
+  sections:
+    Device_stack:
+      quantities:
+        device_architecture:
+          type: 
+            type_kind: Enum
+            type_data:
+              -  'Monolithic_device'
+              -  '2_separable_subcells'
+              -  '3_separable_subcells'
+              -  '4_separable_subcells'
+              -  'Other'
+          shape: []
+          description: Describe if the tandem cell is one monolithic unit or if the subcells are detachable from each other   
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+        # TO BE extracted in the backend
+        stack_sequence:
+          type: str
+          description: The compleat stack sequence. Will be generated automatically based on the list of layers 
+          shape: []
+          m_annotations:
+            eln:
+              component: StringEditQuantity    
+
+        number_of_layers:
+          type: int
+          description: The number of layers in the device. Will ge generated based on the the list of layers
+          shape: []
+          m_annotations:
+            eln:
+              component: NumberEditQuantity    
+
+      # Sub sections
+      sub_sections:
+        layers:
+          section: '#/Functionality'
+          repeats: true
+
+#################### Base sections ###################################
+    Functionality:
+      quantities:
+        subcell_association:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'Monolithic_device'
+              - 'Bottom_cell'
+              - 'Middle_cell'
+              - 'Top_cell'
+              - 'Other'     
+          description: Which subcell does the layer belongs to? The boundary between bottom and top cell can be blurry in a monolithic device  
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+
+#################### Device layers according to their functionality ###################################
+    Air_gap:
+      base_sections:
+        - '#/Functionality'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str   
+
+        layer_index:
+          type: float
+          shape: []
+          description: Give each layer a numerical index. Preferably starting with zero. Used to keep track of which layers that are deposited on which layers  
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        layer_used_as_substrate:
+          type: float
+          shape: []
+          description: Give the index of the layer onto which this layer was deposited. Used to keep track of which layers that are deposited on which layers, which may not be the same as the order the layers have in the device when it is faced to towards the sun. If this layer is used as a substrate, provide the substrate's own index     
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        thickness:
+          type: float
+          unit: mm
+          shape: []
+          description: Thickens in mm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mm  
+
+    Anti_reflection:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Back_contact:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        is_also_functioning_as_a_primary_substrate:
+          type: boolean
+          shape: []
+          description: True if this is used as a primary substrate for depositing part of the device
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        deposition_location:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'in_house'
+                - 'by_commercial_supplier'
+                - 'other'
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Basic_layer:
+      quantities:  
+        layer_index:
+          type: int
+          shape: []
+          description: Give each layer a numerical index. Preferably starting with zero for the layer closest to the ground (i.e furthest away from the sun) . Used to keep track of which layers that are deposited on which layers  
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        layer_used_as_substrate:
+          type: int
+          shape: []
+          description: Give the index of the layer onto which this layer was deposited. Used to keep track of which layers that are deposited on which layers, which may not be the same as the order the layers have in the device when it is faced to towards the sun. If this layer is used as a substrate, provide the substrate's own index     
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The area of the layer
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2  
+
+        thickness:
+          type: float
+          unit: nm
+          shape: []
+          description: Thickens in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+    Basic_subsections:
+      sub_sections:
+        materials_in_layer:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+          repeats: true
+
+        deposition_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true   
+
+        post_deposition_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true 
+
+        storage_until_use:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Storage'
+
+    Buffer_layer:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Edge_sealing:
+      base_sections:
+        - '#/Functionality'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str   
+
+        thickness:
+          type: float
+          unit: nm
+          shape: []
+          description: Thickens in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+        water_vapour_transmission_rate:
+          type: float
+          unit: g/m**2/hr
+          shape: []
+          description: The water vapour transmission rate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: g/m**2/hr 
+        
+        oxygen_vapour_transmission_rate:
+          type: float
+          unit: cm**3/m**2/hr
+          shape: []
+          description: The oxygen transmission rate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**3/m**2/hr 
+
+      sub_sections:
+        materials_in_layer:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+          repeats: true
+
+        deposition_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true  
+
+    Electrolyte:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+      sub_sections:
+        solution:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Solution'
+
+    Encapsulation:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str    
+
+        water_vapour_transmission_rate:
+          type: float
+          unit: g/m**2/hr
+          shape: []
+          description: The water vapour transmission rate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: g/m**2/hr 
+        
+        oxygen_vapour_transmission_rate:
+          type: float
+          unit: cm**3/m**2/hr
+          shape: []
+          description: The oxygen transmission rate
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**3/m**2/hr         
+
+      sub_sections:
+        materials_in_layer:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+          repeats: true
+
+        deposition_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true  
+
+    ETL:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        electron_mobility:
+          type: float
+          unit: cm**2/(V*s)
+          shape: []
+          description: The carrier mobility
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2/(V*s)
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Front_contact:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        is_also_functioning_as_a_primary_substrate:
+          type: boolean
+          shape: []
+          description: True if this is used as a primary substrate for depositing part of the device
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        deposition_location:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'in_house'
+                - 'by_commercial_supplier'
+                - 'other'
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    HTL:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        hole_mobility:
+          type: float
+          unit: cm**2/(V*s)
+          shape: []
+          description: The carrier mobility
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2/(V*s)
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Interface_modifier:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Mesoporous_scaffold:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+    Middle_contact:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+    Optical_spacer:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str              
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm 
+
+    Other:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality_specific:
+          type: str  
+          shape: []
+          description: The basic functionality of the layer 
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+    Photoabsorber:
+      base_sections:
+        - '#/Functionality'
+        - '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/photoactive_materials.archive.yaml#/Photoactive_material'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+    Recombination_layer:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+    Refractive_index_matching:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+        - '#/Basic_subsections'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        refractive_index:
+          type: float
+          shape: []
+          description: Refractive index
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+    Substrate:
+      base_sections:
+        - '#/Functionality'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        layer_index:
+          type: float
+          shape: []
+          description: Give each layer a numerical index. Preferably starting with zero for the layer closest to the ground (i.e furthest away from the sun) . Used to keep track of which layers that are deposited on which layers  
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        area:
+          type: float
+          unit: cm**2
+          shape: []
+          description: The area of the layer
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: cm**2  
+
+        thickness:
+          type: float
+          unit: mm
+          shape: []
+          description: Thickens in mm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mm
+
+      # Sub sections
+      sub_sections:
+        materials_in_layer:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+          repeats: true
+
+        cleaning_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true   
+
+        storage_until_use:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Storage'
+
+    TCO:
+      base_sections:
+        - '#/Functionality'
+        - '#/Basic_layer'
+      quantities:
+        # TO BE FIXED WITH THE DEFAULT VALUE
+        functionality:
+          type: str
+
+        place_of_deposition:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'in_house'
+                - 'by_collaborator'
+                - 'by_commercial_supplier'
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        sheet_resistance:
+          type: float
+          unit: ohm
+          shape: []
+          description: Sheet resistance. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ohm
+
+        surface_roughness:
+          type: float
+          unit: nm
+          shape: []
+          description: Surface roughness in nm. 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm  
+
+      # Sub sections
+      sub_sections:
+        materials_in_layer:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+          repeats: true
+
+        deposition_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true   
+
+        etching_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true   
+
+        cleaning_procedure:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+          repeats: true   
+
+        storage_until_use:
+          section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Storage'
+
+
+#################### Photo absorber based sections ###################################
+    # Photoactive_material:
+    #   quantities:
+    #     dummy_section:
+    #       type: float
+    #       shape: []
+    #       description: test field. 
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+
+    # Base_photoabsorber_fields:
+    #   quantities:
+    #     layer_index:
+    #       type: float
+    #       shape: []
+    #       description: Give each layer a numerical index. Preferably starting with zero for the layer closest to the ground (i.e furthest away from the sun) . Used to keep track of which layers that are deposited on which layers  
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+
+    #     layer_used_as_substrate:
+    #       type: float
+    #       shape: []
+    #       description: Give the index of the layer onto which this layer was deposited. Used to keep track of which layers that are deposited on which layers, which may not be the same as the order the layers have in the device when it is faced to towards the sun. If this layer is used as a substrate, provide the substrate's own index     
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+
+    #     subcell_association:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #           - 'Bottom_cell'
+    #           - 'Middle_cell'
+    #           - 'Top_cell'
+    #           - 'Other'     
+    #       description: Which subcell does the layer belongs to? The cell with the lowest band gap would be the bottom cell
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity
+
+    #     area:
+    #       type: float
+    #       unit: cm**2
+    #       shape: []
+    #       description: The area of the layer
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: cm**2  
+
+    #     thickness:
+    #       type: float
+    #       unit: nm
+    #       shape: []
+    #       description: Thickens in nm. 
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm 
+
+    # Basic_process_subsections:
+    #   sub_sections:
+    #     deposition_procedure:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+    #       repeats: true   
+
+    #     post_deposition_procedure:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Process_step'
+    #       repeats: true 
+
+    #     storage_until_use:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/process_details.archive.yaml#/Storage'      
+
+    # CIGS:
+    #   base_sections:
+    #     - '#/Photoabsorber' 
+    #     - '#/Base_photoabsorber_fields'
+    #     - '#/Crystallinity_surface_roughness_sample_origin'
+    #     - '#/Basic_process_subsections'       
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+
+    #     composition:
+    #       section: '#/CIGS_composition'
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    # CIGS_composition:
+    #   quantities:
+    #     copper:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Copper
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity 
+    #     indium:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Indium
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity 
+    #     gallium:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Gallium
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #     selenium:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Selenium
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+
+    #     # To be generated in the back end
+    #     long_form:
+    #       type: str      
+
+    # CIS:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'
+    #   - '#/Crystallinity_surface_roughness_sample_origin'
+    #   - '#/Basic_process_subsections'     
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+
+    #     composition:
+    #       section: '#/CIS_composition'
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    # CIS_composition:
+    #   quantities:
+    #     copper:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Copper
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity 
+
+    #     indium:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Indium
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity 
+
+    #     selenium:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Selenium
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+
+    #     # To be generated in the back end
+    #     long_form:
+    #       type: str 
+
+    # CZTS:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'
+    #   - '#/Crystallinity_surface_roughness_sample_origin'
+    #   - '#/Basic_process_subsections'       
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+
+    #     composition:
+    #       section: '#/CZTS_composition'
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    # CZTS_composition:
+    #   quantities:
+    #     copper:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for Copper
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity 
+
+    #     zink:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for zink
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity 
+
+    #     tin:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for tin
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+
+    #     sulfur:
+    #       type: float
+    #       shape: []
+    #       description: The stoichiometric coefficient for sulfur
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity              
+
+    #     # To be generated in the back end
+    #     long_form:
+    #       type: str 
+
+    # Crystallinity_surface_roughness_sample_origin:
+    #   quantities:
+    #     crystallinity:
+    #       type:
+    #         type_kind: Enum
+    #         type_data:
+    #           - 'Single crystal'
+    #           - 'Poly crystalline'
+    #           - 'Amorphous'
+    #       description:
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity               
+
+    #     surface_roughness:
+    #       type: float
+    #       unit: nm
+    #       shape: []
+    #       description: Surface roughness in nm. 
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm 
+
+    #     sample_origin:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #             - 'lab_made'
+    #             - 'commercial'
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity       
+
+    # OPV_blend:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'
+    #   - '#/Basic_process_subsections'        
+    #   quantities:      
+    #     absorber_type:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #             - 'Single_layer'
+    #             - 'Bilayer'
+    #             - 'Heterojuction'
+    #             - 'Other'
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity   
+
+    #     peak_absorption_wavelength:
+    #       type: float
+    #       shape: []
+    #       unit: nm
+    #       description: The wavelength at maximum absorption
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm
+
+    #     molar_extinction_coefficient:
+    #       type: float
+    #       shape: []
+    #       unit: m**2/mol
+    #       description: The wavelength at maximum absorption
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: m**2/mol
+
+    #     HOMO_level:
+    #       type: float
+    #       shape: []
+    #       unit: eV
+    #       description: The energy of the HOMO level
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: eV
+
+    #     LUMO_level:
+    #       type: float
+    #       shape: []
+    #       unit: eV
+    #       description: The energy of the LUMO level
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: eV
+
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+
+    #     chemical_composition:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true         
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    # Organic_dye:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'
+    #   - '#/Basic_process_subsections'     
+    #   quantities:
+    #     dye_origin:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #             - 'lab_made'
+    #             - 'commercial'
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity   
+
+    #     peak_absorption_wavelength:
+    #       type: float
+    #       shape: []
+    #       unit: nm
+    #       description: The wavelength at maximum absorption
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm
+
+    #     molar_extinction_coefficient:
+    #       type: float
+    #       shape: []
+    #       unit: m**2/mol
+    #       description: The wavelength at maximum absorption
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: m**2/mol
+
+    #     HOMO_level:
+    #       type: float
+    #       shape: []
+    #       unit: eV
+    #       description: The energy of the HOMO level
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: eV
+
+    #     LUMO_level:
+    #       type: float
+    #       shape: []
+    #       unit: eV
+    #       description: The energy of the LUMO level
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: eV
+
+    #     Oxidation_potential:
+    #       type: float
+    #       shape: []
+    #       unit: V
+    #       description: The oxidation potential vs the normal hydrogen electrode
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: V
+
+    #   # Sub sections
+    #   sub_sections:
+    #     chemical_composition:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+    #       repeats: true         
+
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+      
+    # Other_photoabsorber:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'   
+    #   - '#/Crystallinity_surface_roughness_sample_origin'
+    #   - '#/Basic_process_subsections'            
+    #   quantities:
+    #     material:
+    #       type: str
+    #       shape: []
+    #       description: The material of photo absorber
+    #       m_annotations:
+    #         eln:
+    #           component: StringEditQuantity   
+
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+
+    #     chemical_composition:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+    #       repeats: true         
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    # Quantum_dots:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'
+    #   - '#/Basic_process_subsections'         
+    #   quantities:
+    #     material:
+    #       type: str
+    #       shape: []
+    #       description: The material of the quantum dots
+    #       m_annotations:
+    #         eln:
+    #           component: StringEditQuantity   
+
+    #     particle_size:
+    #       type: float
+    #       unit: nm
+    #       shape: []
+    #       description: particle diameter. 
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm   
+
+    #     sample_origin:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #             - 'lab_made'
+    #             - 'commercial'
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity 
+
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'          
+
+    #     chemical_composition:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    #     ligands:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Chemical'
+    #       repeats: true      
+
+    # Perovskite:
+    #   base_sections:
+    #     - '#/Photoabsorber'  
+    #     - '#/Base_photoabsorber_fields'
+    #     - '#/Basic_process_subsections'   
+    #   quantities:
+    #     surface_roughness:
+    #       type: float
+    #       unit: nm
+    #       shape: []
+    #       description: Surface roughness in nm. 
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm   
+
+    #     dimensionality:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #           - '0D'
+    #           - '1D'
+    #           - '2D'
+    #           - '2D/3D'
+    #           - '3D'
+    #           - 'Other'          
+    #       description: The dimensionality of the perovskite, i.e. 3D, 2D, 1D (nanorods), quantum dots (0D), etc. 
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity
+
+    #     crystallinity:
+    #       type:
+    #         type_kind: Enum
+    #         type_data:
+    #           - 'Polycrystalline film'
+    #           - 'Single crystal'
+    #           - 'Quantum dots'
+    #           - 'Nano rods'
+    #           - 'Amorphous'
+    #           - 'Other'
+    #       description: 
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity 
+
+    #     average_grain_size:
+    #       type: float
+    #       unit: nm
+    #       shape: []
+    #       description: The average grain size
+    #       m_annotations:
+    #         eln:
+    #           component: NumberEditQuantity
+    #           defaultDisplayUnit: nm
+
+    #     sample_origin:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #             - 'lab_made'
+    #             - 'commercial'
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity
+
+    #     is_lead_free:
+    #       type: boolean
+    #       shape: []
+    #       description: True if the perovskite does not contain lead
+    #       m_annotations:
+    #           eln:
+    #             component: BoolEditQuantity 
+
+    #     is_inorganic:
+    #       type: boolean
+    #       shape: []
+    #       description: True if the perovskite is inorganic
+    #       m_annotations:
+    #           eln:
+    #             component: BoolEditQuantity 
+
+    #     is_a_double_perovskite:
+    #       type: boolean
+    #       shape: []
+    #       description: True if it is a double perovskite structure
+    #       m_annotations:
+    #           eln:
+    #             component: BoolEditQuantity
+
+    #     has_a_2D_perovskite_capping_layer:
+    #       type: boolean
+    #       shape: []
+    #       description: True if the perovskite has a thin capping layer of a 2D perovskite
+    #       m_annotations:
+    #           eln:
+    #             component: BoolEditQuantity
+
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'
+
+    #     composition:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/perovskite_composition.archive.yaml#/Composition'
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+
+    # Silicon:
+    #   base_sections:
+    #   - '#/Photoabsorber'  
+    #   - '#/Base_photoabsorber_fields'
+    #   - '#/Crystallinity_surface_roughness_sample_origin'
+    #   - '#/Basic_process_subsections'      
+    #   quantities:
+    #     # TODO needs to complement the list
+    #     cell_type:
+    #       type: 
+    #         type_kind: Enum
+    #         type_data:
+    #             - 'HJT'
+    #             - 'PERC'
+    #             - 'TOPCon'
+    #             - 'PERL'
+    #             - 'Other'
+    #       m_annotations:
+    #         eln:
+    #           component: EnumEditQuantity               
+
+    #     # TODO improve this functionality
+    #     doping_sequence:
+    #       type: str
+    #       shape: []
+    #       description: Doping sequence 
+    #       m_annotations:
+    #         eln:
+    #           component: StringEditQuantity 
+
+    #   # Sub sections
+    #   sub_sections:
+    #     band_gap:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/properties.archive.yaml#/Band_gap'            
+
+    #     secondary_phases_impurities_and_dopants:
+    #       section: '../uploads/upwYhJCVTmSnzKqw5lOqHw/raw/materials.archive.yaml#/Materials_in_layer'
+    #       repeats: true
+

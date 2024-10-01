@@ -1,0 +1,399 @@
+definitions:
+  name: Materials
+  sections:
+    Chemical:
+      m_annotations:
+        eln:
+          properties:
+            order:
+              - "name"
+              - "abbreviation"
+              - "molecular_formula"
+              - "smile"
+              - "iupac_name"
+              - "cas_number"
+              - "is_nanostructured"
+              - "aggregation_state"
+              - "mass"
+              - "volume"
+              - "partial_pressure"
+              - "number_of_moles"
+              - "purity"
+      base_sections:
+        - '#/Chemical_naming'
+        - '#/Chemical_amount'
+
+      sub_sections:
+        supplier:
+          section: '#/Supplier'
+        nanostructuration:
+          section: '#/Nanostructuration'
+
+    Chemical_naming:
+      quantities:
+        name:
+          type: str
+          shape: []
+          description: Trade name of the compound
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        abbreviation:
+          type: str
+          shape: []
+          description: Standard abbreviation
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        molecular_formula:
+          type: str
+          shape: []
+          description: The molecular formula
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        smile:
+          type: str
+          shape: []
+          description: The canonical SMILE string
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        iupac_name:
+          type: str
+          shape: []
+          description: The standard IUPAC name
+          m_annotations:
+            eln:  
+              component: StringEditQuantity              
+
+        cas_number:
+          type: str
+          shape: []
+          description: The CAS number if available
+          m_annotations:
+            eln:  
+              component: StringEditQuantity 
+
+        is_nanostructured:
+          type: boolean
+          shape: []
+          description: True if material has a nanostructure, e.g is in the form of nanoparticles, nonorods, etc
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+    Chemical_amount:
+      quantities:
+        aggregation_state:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'solid'
+                - 'liquid'
+                - 'gas'
+                - 'solution'
+                - 'other'
+          m_annotations:
+            eln:
+              component: EnumEditQuantity      
+
+        mass:
+          type: float
+          unit: g
+          shape: []
+          description: The weight of the chemical 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: g     
+
+        volume:
+          type: float
+          unit: ml
+          shape: []
+          description: The volume of the chemical 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml  
+
+        partial_pressure:
+          type: float
+          unit: Pa
+          shape: []
+          description: The partial pressure of the chemical 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: Pa  
+
+        number_of_moles:
+          type: float
+          unit: mol
+          shape: []
+          description: The volume of the chemical 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: mol
+
+        purity:
+          type: str
+          shape: []
+          description: Standard abbreviation
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+    Materials_in_layer:
+      quantities:
+        functionality_in_layer:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'majority_phase'
+                - 'secondary_phase'
+                - 'additive'
+                - 'dopant'
+                - 'impurity'               
+                - 'Other'
+          description: The role of this specific material in the film
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        fraction_of_layer_content:
+          type: float
+          shape: []
+          description: How large part of the layer that is composed of this material
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        fraction_of_layer_content_metric:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'mass_fraction'
+                - 'volume_fraction'
+                - 'mol_fraction'
+          description: The metrics used when stating how large part of the layer that is composed of this material
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+      sub_sections:
+        chemical:
+          section: '#/Chemical'
+
+    Nanostructuration:
+      quantities:
+        shape:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'Nanoparticle'
+                - 'Quantum_dot'
+                - 'Nanorod'
+                - 'Disc'              
+                - 'Other'
+          description: The nanostructure of the material
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        # shape:
+        #   type: str
+        #   description: The nanostructure of the material
+        #   m_annotations:
+        #     eln:
+        #       component: EnumEditQuantity
+        #       suggestions: ['Nanoparticle', 'Quantum_dot', 'Nanorod', 'Disc'] 
+
+        diameter:
+          type: float
+          unit: nm
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm    
+
+        width:
+          type: float
+          unit: nm
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm    
+
+        length:
+          type: float
+          unit: nm
+          shape: []
+          description: 
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: nm    
+
+    Solution:
+      quantities:
+        volume:
+          type: float
+          shape: []
+          unit: ml
+          description: Volume of the solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: ml
+
+        temperature:
+          type: float
+          shape: []
+          unit: °C
+          description: Temperature of the solution when used
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+              
+        density:
+          type: float
+          shape: []
+          unit: g/ml
+          description: Density of the solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: g/ml
+
+        colour:
+          type: str
+          shape: []
+          description: the colour of hte solution
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        preparation_date:
+          type: Datetime
+          description: The datestamp of the procedure
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
+
+        lab_id:
+          type: str
+          shape: []
+          description: Internal id number of the solution
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+
+        age:
+          type: float
+          unit: minute
+          shape: []
+          description: The time between preparation nad use of the solution
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: minute
+
+        is_filtered:
+          type: boolean
+          shape: []
+          description: True if the solution is filtered before use
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        is_stirred:
+          type: boolean
+          shape: []
+          description: True if the solution is stirred before use
+          m_annotations:
+            eln:
+              component: BoolEditQuantity
+
+        temperature_max:
+          type: float
+          shape: []
+          unit: °C
+          description: Maximum temperature the solution has been subjected to
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: °C
+
+        viscosity:
+          type: float
+          shape: []
+          unit: Pa*s
+          description: Viscosity
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: Pa*s
+
+      sub_sections:
+        environmental_conditions_during_preparation:
+          section: '../uploads/3PqJJxRIQkqQsyEYkrWDGg/raw/environmental_conditions.archive.yaml#/Environmental_conditions'
+
+        chemicals:
+          section: '#/Chemical'
+          repeats: true    
+
+    Supplier:
+      quantities:
+        place_of_origin:
+          type: 
+            type_kind: Enum
+            type_data:
+                - 'in_house'
+                - 'from_collaborator'
+                - 'from_commercial_supplier'
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        name_of_supplier:
+          type: str
+          shape: []
+          description: Trade name of the compound
+          m_annotations:
+            eln:  
+              component: StringEditQuantity      
+
+        catalog_number:
+          type: str
+          shape: []
+          description: Standard abbreviation
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        batch_number:
+          type: str
+          shape: []
+          description: Standard abbreviation
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        delivery_date:
+          type: Datetime
+          description: Publication date
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
