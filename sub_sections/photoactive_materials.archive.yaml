@@ -33,21 +33,17 @@ definitions:
 
     Base_photoabsorber_fields:
       quantities:
-        layer_index:
-          type: float
-          shape: []
-          description: Give each layer a numerical index. Preferably starting with zero for the layer closest to the ground (i.e furthest away from the sun) . Used to keep track of which layers that are deposited on which layers  
+        deposition_direction:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'from_earth_to_sun'
+              - 'from_sun_to_earth'
+              - 'is_a_substrate'  
+          description: An indication of deposition direction and which layer that was used as a substrate during the deposition  
           m_annotations:
             eln:
-              component: NumberEditQuantity
-
-        layer_used_as_substrate:
-          type: float
-          shape: []
-          description: Give the index of the layer onto which this layer was deposited. Used to keep track of which layers that are deposited on which layers, which may not be the same as the order the layers have in the device when it is faced to towards the sun. If this layer is used as a substrate, provide the substrate's own index     
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
+              component: EnumEditQuantity
 
         subcell_association:
           type: 
@@ -107,46 +103,11 @@ definitions:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/properties.archive.yaml#/Band_gap'
 
         composition:
-          section: '#/CIGS_composition'
+          section: '#/Composition'
 
         secondary_phases_impurities_and_dopants:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Materials_in_layer'
           repeats: true
-
-    CIGS_composition:
-      quantities:
-        copper:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Copper
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-        indium:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Indium
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-        gallium:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Gallium
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
-        selenium:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Selenium
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
-
-        # To be generated in the back end
-        long_form:
-          type: str      
 
     CIS:
       base_sections:
@@ -160,41 +121,69 @@ definitions:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/properties.archive.yaml#/Band_gap'
 
         composition:
-          section: '#/CIS_composition'
+          section: '#/Composition'
 
         secondary_phases_impurities_and_dopants:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Materials_in_layer'
           repeats: true
 
-    CIS_composition:
+    Composition:
       quantities:
-        copper:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Copper
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-
-        indium:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Indium
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-
-        selenium:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Selenium
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
-
         # To be generated in the back end
+        short_form:
+          type: str
+          shape: []
+          description: The Perovskite composition without stoichiometric coefficients. To be generated in the back end 
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
         long_form:
-          type: str 
+          type: str
+          shape: []
+          description: The Perovskite composition acording to IUPAC recomendations. To be generated in the back end 
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        # Parameters to be given by the user
+        composition_estimate:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Estimated from precursor solutions'
+              - 'Literature value'
+              - 'Estimated from XRD data'
+              - 'Estimated from spectroscopic data'
+              - 'Theoretical simulation'
+              - 'Hypothetical compound'
+              - 'Other'
+          description: 
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+        sample_type:
+          type:
+            type_kind: Enum
+            type_data:
+              - 'Polycrystalline film'
+              - 'Single crystal'
+              - 'Quantum dots'
+              - 'Nano rods'
+              - 'Colloidal solution'
+              - 'Amorphous'
+              - 'Other'
+          description: 
+          m_annotations:
+            eln:
+              component: EnumEditQuantity 
+
+      # Sub sections
+      sub_sections:
+        ions:
+          section: '#/Ions'
+          repeats: true
 
     CZTS:
       base_sections:
@@ -208,49 +197,11 @@ definitions:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/properties.archive.yaml#/Band_gap'
 
         composition:
-          section: '#/CZTS_composition'
+          section: '#/Composition'
 
         secondary_phases_impurities_and_dopants:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Materials_in_layer'
           repeats: true
-
-    CZTS_composition:
-      quantities:
-        copper:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for Copper
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-
-        zink:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for zink
-          m_annotations:
-            eln:
-              component: NumberEditQuantity 
-
-        tin:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for tin
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
-
-        sulfur:
-          type: float
-          shape: []
-          description: The stoichiometric coefficient for sulfur
-          m_annotations:
-            eln:
-              component: NumberEditQuantity              
-
-        # To be generated in the back end
-        long_form:
-          type: str 
 
     Crystallinity_surface_roughness_sample_origin:
       quantities:
@@ -286,13 +237,100 @@ definitions:
             eln:
               component: EnumEditQuantity       
 
+    Ions:
+      quantities:
+        abbreviation:
+          type: str
+          shape: []
+          description: The standard abbreviation of the ion. If the abbreviation is in the archive, additional data is complemented automatically
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        coefficient:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+
+        # Here we could have one boolean filed asking if the remainder of the ion data should be read for online source
+        
+        # Here we could give a text field asking for teh source of the ion data, but  with a predetermined default answer 
+
+        common_name:
+          type: str
+          shape: []
+          description: The common trade name of the ion
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        molecular_formula:
+          type: str
+          shape: []
+          description: The molecular formula
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        smile:
+          type: str
+          shape: []
+          description: The canonical SMILE string
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        iupac_name:
+          type: str
+          shape: []
+          description: The standard IUPAC name
+          m_annotations:
+            eln:  
+              component: StringEditQuantity              
+
+        cas_number:
+          type: str
+          shape: []
+          description: The CAS number if available
+          m_annotations:
+            eln:  
+              component: StringEditQuantity 
+
+        source_compound_smile:
+          type: str
+          shape: []
+          description: The canonical SMILE string
+          m_annotations:
+            eln:  
+              component: StringEditQuantity
+
+        source_compound_iupac_name:
+          type: str
+          shape: []
+          description: The standard IUPAC name
+          m_annotations:
+            eln:  
+              component: StringEditQuantity              
+
+        source_compound_cas_number:
+          type: str
+          shape: []
+          description: The CAS number if available
+          m_annotations:
+            eln:  
+              component: StringEditQuantity 
+
     OPV_blend:
       base_sections:
       # - '#/Photoactive_material'  
       - '#/Base_photoabsorber_fields'
       - '#/Basic_process_subsections'        
       quantities:      
-        absorber_type:
+        cell_type:
           type: 
             type_kind: Enum
             type_data:
@@ -303,6 +341,14 @@ definitions:
           m_annotations:
             eln:
               component: EnumEditQuantity   
+
+        blend:
+          type: str
+          shape: []
+          description: The name of the OPV blend. Often in the form - "name of acceptor:"name of donor" 
+          m_annotations:
+            eln:  
+              component: StringEditQuantity    
 
         peak_absorption_wavelength:
           type: float
@@ -658,3 +704,108 @@ definitions:
         secondary_phases_impurities_and_dopants:
           section: '../uploads/9N4mceBaSzmTBYT16j0Tvg/raw/materials.archive.yaml#/Materials_in_layer'
           repeats: true
+
+
+# Older sections
+    CIGS_composition:
+      quantities:
+        copper:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Copper
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+        indium:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Indium
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+        gallium:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Gallium
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+        selenium:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Selenium
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        # To be generated in the back end
+        long_form:
+          type: str      
+
+    CIS_composition:
+      quantities:
+        copper:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Copper
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        indium:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Indium
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        selenium:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Selenium
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        # To be generated in the back end
+        long_form:
+          type: str 
+
+    CZTS_composition:
+      quantities:
+        copper:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for Copper
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        zink:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for zink
+          m_annotations:
+            eln:
+              component: NumberEditQuantity 
+
+        tin:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for tin
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+
+        sulfur:
+          type: float
+          shape: []
+          description: The stoichiometric coefficient for sulfur
+          m_annotations:
+            eln:
+              component: NumberEditQuantity              
+
+        # To be generated in the back end
+        long_form:
+          type: str 

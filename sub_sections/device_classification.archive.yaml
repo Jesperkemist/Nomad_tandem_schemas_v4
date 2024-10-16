@@ -9,6 +9,7 @@ definitions:
             type_data:
               - 'Monolithic'
               - 'Stacked'
+              - 'Laminated'
               - 'Spectral_splitter'
               - 'Wide_bandgap_cell_used_as_reflector'
               - '...'

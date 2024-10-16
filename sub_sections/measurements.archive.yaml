@@ -48,7 +48,7 @@ definitions:
               - 'Bottom_cell'
               - 'Middle_cell'
               - 'Top_cell'
-              - 'shaded_top_cell'
+              - 'shaded_bottom_cell'
               - 'shaded_middle_cell'              
               - 'Other'
           description: The type of device on which the measurement is done              
@@ -415,6 +415,17 @@ definitions:
               component: NumberEditQuantity
               defaultDisplayUnit: V/s
 
+        scan_direction:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'reverse'
+              - 'forward'
+          description: The Scan direction. Forward is from 0 to Voc              
+          m_annotations:
+            eln:
+              component: EnumEditQuantity  
+
         delay_time:
           type: float
           unit: s
@@ -475,6 +486,14 @@ definitions:
           m_annotations:
               eln:
                 component: BoolEditQuantity
+
+        is_identical_to_cell_in_tandem_stack:
+          type: boolean
+          shape: []
+          description: True if the cell is identical to the cell in the tandem stack
+          m_annotations:
+              eln:
+                component: BoolEditQuantity 
 
         is_preconditioned_before_measurement:
           type: boolean
@@ -769,6 +788,14 @@ definitions:
               eln:
                 component: BoolEditQuantity 
 
+        UV_filter_is_used:
+          type: boolean
+          shape: []
+          description: True of a UV filter is used
+          m_annotations:
+              eln:
+                component: BoolEditQuantity 
+
         light_source_brand_name:
           type: str
           shape: []
@@ -1025,6 +1052,16 @@ definitions:
           m_annotations:
             eln:
               component: DateTimeEditQuantity  
+
+        length_of_measurement:
+          type: float
+          unit: hr
+          shape: []
+          description: The duration of the experiment
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+              defaultDisplayUnit: hr
 
         location_city:
           type: str

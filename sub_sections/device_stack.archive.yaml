@@ -8,9 +8,10 @@ definitions:
             type_kind: Enum
             type_data:
               -  'Monolithic_device'
-              -  '2_separable_subcells'
-              -  '3_separable_subcells'
-              -  '4_separable_subcells'
+              -  'Stacked'
+              -  'Laminated'
+              -  'Spectral_splitter'
+              -  'Wide_bandgap_cell_used_as_reflector'
               -  'Other'
           shape: []
           description: Describe if the tandem cell is one monolithic unit or if the subcells are detachable from each other   
@@ -66,22 +67,6 @@ definitions:
         # TO BE FIXED WITH THE DEFAULT VALUE
         functionality:
           type: str   
-
-        layer_index:
-          type: float
-          shape: []
-          description: Give each layer a numerical index. Preferably starting with zero. Used to keep track of which layers that are deposited on which layers  
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
-
-        layer_used_as_substrate:
-          type: float
-          shape: []
-          description: Give the index of the layer onto which this layer was deposited. Used to keep track of which layers that are deposited on which layers, which may not be the same as the order the layers have in the device when it is faced to towards the sun. If this layer is used as a substrate, provide the substrate's own index     
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
 
         thickness:
           type: float
@@ -174,21 +159,17 @@ definitions:
 
     Basic_layer:
       quantities:  
-        layer_index:
-          type: int
-          shape: []
-          description: Give each layer a numerical index. Preferably starting with zero for the layer closest to the ground (i.e furthest away from the sun) . Used to keep track of which layers that are deposited on which layers  
+        deposition_direction:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'from_earth_to_sun'
+              - 'from_sun_to_earth'
+              - 'is_a_substrate'  
+          description: An indication of deposition direction and which layer that was used as a substrate during the deposition  
           m_annotations:
             eln:
-              component: NumberEditQuantity
-
-        layer_used_as_substrate:
-          type: int
-          shape: []
-          description: Give the index of the layer onto which this layer was deposited. Used to keep track of which layers that are deposited on which layers, which may not be the same as the order the layers have in the device when it is faced to towards the sun. If this layer is used as a substrate, provide the substrate's own index     
-          m_annotations:
-            eln:
-              component: NumberEditQuantity
+              component: EnumEditQuantity
 
         area:
           type: float
@@ -693,13 +674,17 @@ definitions:
         functionality:
           type: str
 
-        layer_index:
-          type: float
-          shape: []
-          description: Give each layer a numerical index. Preferably starting with zero for the layer closest to the ground (i.e furthest away from the sun) . Used to keep track of which layers that are deposited on which layers  
+        deposition_direction:
+          type: 
+            type_kind: Enum
+            type_data:
+              - 'from_earth_to_sun'
+              - 'from_sun_to_earth'
+              - 'is_a_substrate'  
+          description: An indication of deposition direction and which layer that was used as a substrate during the deposition  
           m_annotations:
             eln:
-              component: NumberEditQuantity
+              component: EnumEditQuantity
 
         area:
           type: float
